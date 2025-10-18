@@ -1,9 +1,13 @@
+import { Audience } from "./audience";
 import { TicketOffice } from "./ticket-office";
 
 export class TicketSeller {
   constructor(private readonly ticketOffice: TicketOffice) {}
 
-  public getTicketOffice(): TicketOffice {
-    return this.ticketOffice;
+  public sellTo(audience: Audience): void {
+    const ticket = this.ticketOffice.getTicket();
+    if (ticket) {
+      this.ticketOffice.plusAmount(audience.buy(ticket));
+    }
   }
 }
